@@ -46,13 +46,13 @@ const changeDirection = (e) => {
     }
 }
 
+// Make mobile arrow buttons trigger real keyboard-like behavior
 controls.forEach(key => {
-    // Calling changeDirection on each key click and passing key dataset value as object
-    key.addEventListener("click", () => changeDirection({
-        key: key.dataset.key
-    })
-    )
-})
+    key.addEventListener("click", () => {
+        const event = new KeyboardEvent("keydown", { key: key.dataset.key });
+        document.dispatchEvent(event);
+    });
+});
 
 const initGame = () => {
     if(gameOver) return handleGameOver();
